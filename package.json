@@ -1,0 +1,25 @@
+{
+  "name": "browserify-marionette-express",
+  "version": "0.0.1",
+  "description": "A browserify, marionette, express.js, middleware for simple development",
+  "main": "index.js",
+  "scripts": {
+    "test": "node test/test.js"
+  },
+  "keywords": [
+    "browserify",
+    "express",
+    "marionette",
+    "backbone"
+  ],
+  "devDependencies": {
+    "tap": "0.4.4"
+  },
+  "dependencies": {
+    "browserify": "~2.35.0",
+    "browserify-shim": "~2.0.8",
+    "uglify-js": "~2.4.2"
+  },
+  "author": "Johannes Boyne <johannes@boyne.de>",
+  "license": "MIT"
+}
