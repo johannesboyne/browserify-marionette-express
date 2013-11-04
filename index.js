@@ -9,12 +9,14 @@ var debug_flag = true;
 if (process.env.NODE_ENV && 'development' != process.env.NODE_ENV) {
   debug_flag = false;
 }
-var cached;
-var watcher;
+
+var in_mem_cache = {};
+var watchers = {};
+
 function bundleIt (path, fn) {
 
-  if (cached) {
-    fn(cached);
+  if (in_mem_cache[path]) {
+    fn(in_mem_cache[path]);
     return;
   } else {
     _bundle(path, fn);
@@ -50,12 +52,12 @@ function _bundle (path, fn) {
     if (err) return console.error(err);
 
     if (!debug_flag)
-      cached = uglify.minify(src, {fromString: true}).code;
+      in_mem_cache[path] = uglify.minify(src, {fromString: true}).code;
     else
-      cached = src;
+      in_mem_cache[path] = src;
 
     if (fn) {
-      fn(cached);
+      fn(in_mem_cache[path]);
       fn = null;
     }
   });
@@ -64,13 +66,13 @@ function _bundle (path, fn) {
 module.exports = function (path) {
   return function (req, res) {
     if (debug_flag) {
-      var a = path.split('/');
-      a.pop();
-      console.log('watch:', a.join('/'));
-      watcher = chokidar.watch(a.join('/'));
-      watcher.on('change', function(fpath) {
-        console.log('File', fpath, 'has been changed'); _bundle(path, null);
-      });
+      if (!watchers[path]) {
+        var a = path.split('/'); a.pop();
+        watchers[path] = chokidar.watch(a.join('/'));
+        watchers[path].on('change', function(fpath) {
+          console.log('File', fpath, 'has been changed'); _bundle(path, null);
+        });
+      }
     }
     bundleIt(path, function (js_src) {
       res.setHeader('Content-Type', 'application/javascript');
