@@ -7,6 +7,7 @@ test("test the simple backbone-marionette-express", function (t) {
     setHeader: function () {},
     end: function (src) {
       t.type(src, "string", "type of src is string");
+      t.ok(src.match(/loremipsumdolor/));
       t.end();
     }
   });

@@ -10,6 +10,8 @@ require('backbone.babysitter');
 // -----------------------------------------------------------------------------
 
 // Modules
+var fer = require('./fe.required');
 
 var MyApp = new Backbone.Marionette.Application();
 MyApp.start();
+fer.testMethod();
