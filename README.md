@@ -42,7 +42,7 @@ MyApp.addInitializer(function (options) {
 MyApp.start();
 ```
 
-For the record I do know, that the part between the top comment is *not that nice!* but it really does it's job well!
+For the record: I do know, that the part between the top comment is *not that nice!* but it really does it's job well!
 
 # LICENSE
 

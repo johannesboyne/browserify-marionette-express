@@ -18,7 +18,8 @@
   "dependencies": {
     "browserify": "~2.35.0",
     "browserify-shim": "~2.0.8",
-    "uglify-js": "~2.4.2"
+    "uglify-js": "~2.4.2",
+    "chokidar": "~0.7.0"
   },
   "author": "Johannes Boyne <johannes@boyne.de>",
   "license": "MIT"
