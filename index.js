@@ -63,13 +63,15 @@ function _bundle (path, fn) {
 
 module.exports = function (path) {
   return function (req, res) {
-    var a = path.split('/');
-    a.pop();
-    console.log('watch:', a.join('/'));
-    watcher = chokidar.watch(a.join('/'));
-    watcher.on('change', function(fpath) {
-      console.log('File', fpath, 'has been changed'); _bundle(path, null);
-    });
+    if (debug_flag) {
+      var a = path.split('/');
+      a.pop();
+      console.log('watch:', a.join('/'));
+      watcher = chokidar.watch(a.join('/'));
+      watcher.on('change', function(fpath) {
+        console.log('File', fpath, 'has been changed'); _bundle(path, null);
+      });
+    }
     bundleIt(path, function (js_src) {
       res.setHeader('Content-Type', 'application/javascript');
       res.end(js_src);
