@@ -48,3 +48,4 @@ For the record: I do know, that the part between the top comment is *not that ni
 
 MIT
 
+[![endorse](https://api.coderwall.com/johannesboyne/endorsecount.png)](https://coderwall.com/johannesboyne)
